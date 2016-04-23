@@ -35,6 +35,7 @@ Bundle 'plasticboy/vim-markdown'
 call vundle#end()
 
 function! s:Vimrc()
+  call s:SyntaxHighlighting()
   call s:OpenSplitsAfterCurrent()
   call s:TabToEscapeInsertMode()
   call s:Softtabs2()
@@ -49,6 +50,10 @@ function! s:Vimrc()
   call s:LeaderBreakupLine()
   call s:LeaderForCtrlP()
   call s:useDoubleAsteriskInGrepForRecursive()
+endfunction
+
+function! s:SyntaxHighlighting()
+  syntax on
 endfunction
 
 function! s:OpenSplitsAfterCurrent()
