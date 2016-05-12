@@ -30,7 +30,7 @@ Bundle 'stanangeloff/php.vim'
 Bundle 'plasticboy/vim-markdown'
 " Bundle 'godlygeek/tabular'
 " Bundle 'ack.vim'
-" Bundle 'Sporky023/vim-flavored-markdown'
+Bundle 'Sporky023/vim-flavored-markdown'
 
 call vundle#end()
 
