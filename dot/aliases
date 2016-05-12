@@ -6,6 +6,7 @@ alias be='bundle exec'
 alias g="git status"
 alias ga="git add -A"
 alias gb="clear && git branch -a"
+alias gbl="clear && git branch"
 alias gcm="git commit -m"
 alias gd="git diff"
 alias gdc="git diff --cached"
