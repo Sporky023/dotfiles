@@ -11,4 +11,8 @@ alias gcm="git commit -m"
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gl="git log -10 --pretty=oneline"
+alias cgl='clear; gl'
 alias gco="git checkout"
+
+alias ctls="clear; tmux ls"
+alias ta="tmux a -t"

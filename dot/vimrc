@@ -7,6 +7,7 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set number
+set backspace=2
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
@@ -28,9 +29,12 @@ Bundle 'elzr/vim-json'
 Bundle 'geoffharcourt/vim-matchit'
 Bundle 'stanangeloff/php.vim'
 Bundle 'plasticboy/vim-markdown'
-" Bundle 'godlygeek/tabular'
+Bundle 'godlygeek/tabular'
 " Bundle 'ack.vim'
 Bundle 'Sporky023/vim-flavored-markdown'
+Bundle 'tpope/vim-surround'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'leafgarland/typescript-vim'
 
 call vundle#end()
 
@@ -47,9 +51,12 @@ function! s:Vimrc()
   call s:LeaderIsComma()
   call s:LeaderComment()
   call s:LeaderSave()
+  call s:LeaderCloseWindow()
   call s:LeaderBreakupLine()
   call s:LeaderForCtrlP()
   call s:useDoubleAsteriskInGrepForRecursive()
+  call s:treatRuAsRuby()
+  call s:SetCtrlpIgnore()
 endfunction
 
 function! s:SyntaxHighlighting()
@@ -109,6 +116,10 @@ function! s:LeaderSave()
   nmap <Leader><Leader> :w<CR>
 endfunction
 
+function! s:LeaderCloseWindow()
+  nmap <Leader>w :q<CR>
+endfunction
+
 function! s:LeaderBreakupLine()
   call s:LeaderBreakupLineOnComma()
   call s:LeaderBreakupLineOnBrackets()
@@ -137,6 +148,17 @@ endfunction
 function! s:useDoubleAsteriskInGrepForRecursive()
   " http://unix.stackexchange.com/questions/172275/vim-grep-using-the-bash-globstar-option
   set shell+=\ -O\ globstar
+endfunction
+
+function! s:treatRuAsRuby()
+  au BufRead,BufNewFile *.ru setfiletype ruby
+endfunction
+
+function! s:SetCtrlpIgnore()
+  let g:ctrlp_custom_ignore = {
+        \ 'dir': 'node_modules'
+        \ }
+
 endfunction
 
 call s:Vimrc()
