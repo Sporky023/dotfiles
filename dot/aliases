@@ -10,7 +10,7 @@ alias gbl="clear && git branch"
 alias gcm="git commit -m"
 alias gd="git diff"
 alias gdc="git diff --cached"
-alias gl="git log -10 --pretty=oneline"
+alias gl="git log -15 --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short"
 alias cgl='clear; gl'
 alias gco="git checkout"
 
