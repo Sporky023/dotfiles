@@ -13,6 +13,7 @@ alias gdc="git diff --cached"
 alias gl="git log -15 --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an %Creset%s %Cgreen%d' --date=short"
 alias cgl='clear; gl'
 alias gco="git checkout"
+alias glcc="git log -1 --pretty=format:'%h' | pbcopy"
 
 alias ctls="clear; tmux ls"
 alias ta="tmux a -t"
