@@ -14,6 +14,7 @@ alias gl="git log -15 --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an %Creset%s
 alias cgl='clear; gl'
 alias gco="git checkout"
 alias glcc="git log -1 --pretty=format:'%h' | pbcopy"
+alias gsh="git show head"
 
 alias ctls="clear; tmux ls"
 alias ta="tmux a -t"
