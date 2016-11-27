@@ -54,6 +54,8 @@ function! s:Vimrc()
   call s:LeaderCloseWindow()
   call s:LeaderBreakupLine()
   call s:LeaderForCtrlP()
+  call s:LeaderInsertTimestamp()
+
   call s:useDoubleAsteriskInGrepForRecursive()
   call s:treatRuAsRuby()
   call s:SetCtrlpIgnore()
@@ -143,6 +145,10 @@ function! s:LeaderForCtrlP()
   nmap <Leader>av :vs<CR>:CtrlP<CR>
   nmap <Leader>as :sp<CR>:CtrlP<CR>
   nmap <Leader>at :tabe<CR>:CtrlP<CR>
+endfunction
+
+function! s:LeaderInsertTimestamp()
+  nmap <Leader>t :put =strftime('%c')<CR>
 endfunction
 
 function! s:useDoubleAsteriskInGrepForRecursive()
