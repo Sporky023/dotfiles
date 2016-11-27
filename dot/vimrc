@@ -35,6 +35,7 @@ Bundle 'Sporky023/vim-flavored-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'wesQ3/vim-windowswap'
 
 call vundle#end()
 
@@ -55,6 +56,7 @@ function! s:Vimrc()
   call s:LeaderBreakupLine()
   call s:LeaderForCtrlP()
   call s:LeaderInsertTimestamp()
+  call s:LeaderWindowswap()
 
   call s:useDoubleAsteriskInGrepForRecursive()
   call s:treatRuAsRuby()
@@ -149,6 +151,11 @@ endfunction
 
 function! s:LeaderInsertTimestamp()
   nmap <Leader>t :put =strftime('%c')<CR>
+endfunction
+
+function! s:LeaderWindowswap()
+  let g:windowswap_map_keys = 0
+  nnoremap <silent> <leader>xw :call WindowSwap#EasyWindowSwap()<CR>
 endfunction
 
 function! s:useDoubleAsteriskInGrepForRecursive()
