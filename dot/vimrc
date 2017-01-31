@@ -36,6 +36,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'wesQ3/vim-windowswap'
+Bundle 'wakatime/vim-wakatime'
+Bundle 'ekalinin/Dockerfile.vim' 
 
 call vundle#end()
 
@@ -47,6 +49,7 @@ function! s:Vimrc()
   call s:VisualAppearance()
   call s:AllowPluginsToSetIndentRules()
   call s:UseGhMarkdown()
+  call s:HighlightJbuilderAsRuby()
   call s:NonGreedyTabCompletion()
 
   call s:LeaderIsComma()
@@ -99,6 +102,10 @@ function! s:UseGhMarkdown()
     au!
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
   augroup END
+endfunction
+
+function! s:HighlightJbuilderAsRuby()
+  au BufNewFile,BufRead *.json.jbuilder set ft=ruby
 endfunction
 
 function! s:NonGreedyTabCompletion()

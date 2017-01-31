@@ -1,20 +1,51 @@
-alias saver="clear; ls -l ~; sleep 7; open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
+alias saver="clear; ls -l ~; sleep 7; /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias serve="ruby -run -e httpd . -p 9090"
 
 alias be='bundle exec'
 
 alias g="git status"
-alias ga="git add -A"
-alias gb="clear && git branch -a"
-alias gbl="clear && git branch"
-alias gcm="git commit -m"
-alias gd="git diff"
-alias gdc="git diff --cached"
-alias gl="git log -15 --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an %Creset%s %Cgreen%d' --date=short"
-alias cgl='clear; gl'
-alias gco="git checkout"
-alias glcc="git log -1 --pretty=format:'%h' | pbcopy"
-alias gsh="git show head"
+  alias ga="git add -A"
 
-alias ctls="clear; tmux ls"
+  alias gb="git branch -a"
+    alias gbl="git branch"
+
+  alias gcm="git commit -m"
+
+  alias gd="git diff"
+    alias gdc="git diff --cached"
+
+  alias gl="git log -15 --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an %Creset%s %Cgreen%d' --date=short"
+    alias cgl='clear; gl'
+
+  alias gco="git checkout"
+    alias gcob='gco -b'
+
+  alias glcc="git log -1 --pretty=format:'%h' | pbcopy"
+  alias gldnc=' echo "https://github.com/Sporky023/vdiamond/commit/\$(LAST_COMMIT)" | pbcopy'
+
+  alias gsh="git show"
+
+alias t="tmux" 
+  alias td=". ~/.tmux/dnv"
+
 alias ta="tmux a -t"
+
+
+alias tn="tmux new -s"
+alias tls="tmux ls"
+  alias ctls="clear; tls"
+
+
+
+alias l="ls -lhG"
+
+alias d='docker'
+  alias dps='docker ps'
+    alias dpsa='dps -a'
+
+  alias dl='docker logs'
+  alias di='docker images'
+  alias dbt='docker build . -t'
+
+  alias drmc="dps -a | grep 'Created' | cut -d ' ' -f 1 | xargs docker rm"
+  alias drme="dps -a | grep 'Exited' | cut -d ' ' -f 1 | xargs docker rm"
