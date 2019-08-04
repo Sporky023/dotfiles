@@ -29,15 +29,34 @@ Bundle 'elzr/vim-json'
 Bundle 'geoffharcourt/vim-matchit'
 Bundle 'stanangeloff/php.vim'
 Bundle 'plasticboy/vim-markdown'
+" Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+Bundle 'isRuslan/vim-es6'
 Bundle 'godlygeek/tabular'
-" Bundle 'ack.vim'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'Matt-Deacalion/vim-systemd-syntax'
+
 Bundle 'Sporky023/vim-flavored-markdown'
+" Bundle 'rhysd/vim-gfm-syntax'
+
 Bundle 'tpope/vim-surround'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'wesQ3/vim-windowswap'
 Bundle 'wakatime/vim-wakatime'
+
 Bundle 'ekalinin/Dockerfile.vim' 
+Bundle 'digitaltoad/vim-pug'
+" Bundle 'nightsense/seabird'
+Bundle 'flazz/vim-colorschemes'
+" Bundle 'Lokaltog/vim-distinguished'
+Bundle 'dracula/vim'
+" Bundle 'dylanaraps/crayon-theme'
+Bundle 'cakebaker/scss-syntax.vim'
+
+" Bundle 'SirVer/ultisnips'
+" Bundle 'honza/vim-snippets'
+" Bundle 'ack.vim'
 
 call vundle#end()
 
@@ -48,7 +67,7 @@ function! s:Vimrc()
   call s:Softtabs2()
   call s:VisualAppearance()
   call s:AllowPluginsToSetIndentRules()
-  call s:UseGhMarkdown()
+  " call s:UseGhMarkdown()
   call s:HighlightJbuilderAsRuby()
   call s:NonGreedyTabCompletion()
 
@@ -60,10 +79,16 @@ function! s:Vimrc()
   call s:LeaderForCtrlP()
   call s:LeaderInsertTimestamp()
   call s:LeaderWindowswap()
+  call s:LeaderCleanFileWhitespace()
 
   call s:useDoubleAsteriskInGrepForRecursive()
   call s:treatRuAsRuby()
   call s:SetCtrlpIgnore()
+  call s:CtrlpDontSearchForGitDir()
+  " call s:CtrlpIgnoreSameFilesAsGitignore()
+  " call s:CtrlpNoMaxFiles()
+  call s:UseMxwVimJsxForJsExtension()
+  " call s:ConfigureUltiSnips()
 endfunction
 
 function! s:SyntaxHighlighting()
@@ -88,7 +113,9 @@ endfunction
 
 function! s:VisualAppearance()
   set colorcolumn=81
-  colorscheme darkblue
+  colorscheme jellybeans
+  hi StatusLine ctermbg=darkblue
+  hi LineNr ctermfg=darkblue
 endfunction
 
 function! s:AllowPluginsToSetIndentRules()
@@ -106,6 +133,7 @@ endfunction
 
 function! s:HighlightJbuilderAsRuby()
   au BufNewFile,BufRead *.json.jbuilder set ft=ruby
+  au BufNewFile,BufRead *.jbuilder set ft=ruby
 endfunction
 
 function! s:NonGreedyTabCompletion()
@@ -165,6 +193,10 @@ function! s:LeaderWindowswap()
   nnoremap <silent> <leader>xw :call WindowSwap#EasyWindowSwap()<CR>
 endfunction
 
+function! s:LeaderCleanFileWhitespace()
+  nmap <Leader>b :%s/\s\+$//gc<CR>
+endfunction
+
 function! s:useDoubleAsteriskInGrepForRecursive()
   " http://unix.stackexchange.com/questions/172275/vim-grep-using-the-bash-globstar-option
   set shell+=\ -O\ globstar
@@ -175,10 +207,33 @@ function! s:treatRuAsRuby()
 endfunction
 
 function! s:SetCtrlpIgnore()
-  let g:ctrlp_custom_ignore = {
-        \ 'dir': 'node_modules'
-        \ }
-
+  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\'
 endfunction
+
+function! s:CtrlpDontSearchForGitDir()
+  let g:ctrlp_working_path_mode = 0
+endfunction
+
+function! s:CtrlpIgnoreSameFilesAsGitignore()
+  " https://github.com/kien/ctrlp.vim/issues/313
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+endfunction
+
+function! s:CtrlpNoMaxFiles()
+  " https://github.com/kien/ctrlp.vim/issues/234
+  let g:ctrlp_max_files=0
+endfunction
+
+function! s:ConfigureUltiSnips()
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+  let g:UltiSnipsSnippetsDir="~/code/dotfiles/UltiSnips"
+endfunction
+
+function! s:UseMxwVimJsxForJsExtension()
+  let g:jsx_ext_required = 0
+endfunction
+
 
 call s:Vimrc()
