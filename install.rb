@@ -1,8 +1,11 @@
 require 'fileutils'
+require 'pry'
 
 def main
   puts "starting"
   install_each_dot_item_via_symlink
+  install_font
+  install_terminal_theme
   puts "finished"
 
   display_report
@@ -12,6 +15,33 @@ def install_each_dot_item_via_symlink
   items_in_dot.each do |item|
     install_via_symlink(item)
   end
+end
+
+def install_font
+  puts "Installing font variations"
+  font_filepaths.each do |filepath|
+    puts "Installing #{filepath}"
+    `open #{filepath}`
+  end
+  puts "Accept all of the font install dialogs, then hit enter to continue"
+  continue = gets
+end
+
+def font_filepaths
+  Dir.
+    entries(fonts_dirpath).
+    select{ |filename| filename =~ /\.ttf$/ }.
+    map{ |filename| File.join( fonts_dirpath, filename ) }
+end
+
+def fonts_dirpath
+  File.join( File.dirname(__FILE__), '/fonts', '/Source_Code_Pro' ) 
+end
+
+def install_terminal_theme
+  puts "Installing Terminal theme"
+  `cd #{File.dirname(__FILE__)} && . install_terminal_theme.sh`
+  puts "Finished installing Terminal theme"
 end
 
 def display_report
