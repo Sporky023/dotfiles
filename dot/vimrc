@@ -61,6 +61,8 @@ Bundle 'cakebaker/scss-syntax.vim'
 call vundle#end()
 
 function! s:Vimrc()
+  call s:useDoubleAsteriskInGrepForRecursive()
+
   call s:SyntaxHighlighting()
   call s:OpenSplitsAfterCurrent()
   call s:TabToEscapeInsertMode()
@@ -81,7 +83,6 @@ function! s:Vimrc()
   call s:LeaderWindowswap()
   call s:LeaderCleanFileWhitespace()
 
-  call s:useDoubleAsteriskInGrepForRecursive()
   call s:treatRuAsRuby()
   call s:SetCtrlpIgnore()
   call s:CtrlpDontSearchForGitDir()
@@ -197,9 +198,19 @@ function! s:LeaderCleanFileWhitespace()
   nmap <Leader>b :%s/\s\+$//gc<CR>
 endfunction
 
-function! s:useDoubleAsteriskInGrepForRecursive()
+function! s:useDoubleAsteriskInGrepForRecursive() abort
   " http://unix.stackexchange.com/questions/172275/vim-grep-using-the-bash-globstar-option
-  set shell+=\ -O\ globstar
+  let globstarDetection = system('bash -c "shopt | grep globstar"')
+  if globstarDetection ==  ''
+    echo "WARNING: Current bash does not support globstar option!"
+    echo "This means that system() calls will fail,"
+    echo "which among other things will prevent Vundle from installing packages."
+    echo "Recommend you upgrade bash to version >= 4."
+    echo "See function s:useDoubleAsteriskInGrepForRecursive in vimrc"
+    throw "problem"
+  endif
+
+  set shell+=\ -O\ globstar " this requires bash with globstar support
 endfunction
 
 function! s:treatRuAsRuby()
