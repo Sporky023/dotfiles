@@ -1,21 +1,38 @@
+lgc_craft () { craft "$@" https://github.com/lgc-boulder/craft_template/archive/master.zip ; }
+alias lgcraft="lgc_craft"
+
+alias csave="clear; sleep 8; /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias save="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias saver="clear; ls -l ~; sleep 7; /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias serve="ruby -run -e httpd . -p 9090"
 
 alias be='bundle exec'
 
+alias c='clear'
+  alias cls='clear; ls -l'
+
+alias htl='history | tail'
 alias g="git status"
+  alias gca="git commit --amend"
+  alias grc="git rebase --continue"
+
   alias ga="git add -A"
 
   alias gb="git branch -a"
     alias gbl="git branch"
+    alias cgbl="clear; gbl"
 
   alias gcm="git commit -m"
+  alias gcam="git commit --amend"
 
   alias gd="git diff"
     alias gdc="git diff --cached"
 
   alias gl="git log -15 --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an %Creset%s %Cgreen%d' --date=short"
+    alias glt="git log -15 --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an %Creset%s %Cgreen%d'"
+    alias gl-nocolor="git log -15 --pretty=format:'%h %ad %an %s %d' --date=short"
     alias cgl='clear; gl'
+    alias ggl='clear; g && printf "\n" && gl'
 
   alias gco="git checkout"
     alias gcob='gco -b'
@@ -25,17 +42,16 @@ alias g="git status"
 
   alias gsh="git show"
 
-alias t="tmux" 
-  alias td=". ~/.tmux/dnv"
+alias t="tmux -2"
+  alias tc=". ~/.tmux/coding"
 
-alias ta="tmux a -t"
+  alias tn="t new -s"
+  alias tls="t ls"
+    alias ctls="clear; tls"
 
+ alias ta="t a -t"
 
-alias tn="tmux new -s"
-alias tls="tmux ls"
-  alias ctls="clear; tls"
-
-
+alias ltr="tree -I node_modules"
 
 alias l="ls -lhG"
 
@@ -49,3 +65,5 @@ alias d='docker'
 
   alias drmc="dps -a | grep 'Created' | cut -d ' ' -f 1 | xargs docker rm"
   alias drme="dps -a | grep 'Exited' | cut -d ' ' -f 1 | xargs docker rm"
+
+source $HOME/.aliases-local
