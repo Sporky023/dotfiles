@@ -1,0 +1,110 @@
+#!/bin/bash
+
+function find_or_create_session_and_attach {
+  local $subdirectory="api"
+  local $session_name="${2}"
+  local $project_directory="${3}"
+  local $api_port="${4}"
+  local $web_port="${5}"
+  local $dev_database_name="${6}"
+  local $tmuxConf_status_bg="${7}"
+
+  count=$( tmux ls | grep "$session_name:" | wc -c )
+
+  if [ "$(( $count + 1 ))" != "1" ];
+  then
+    echo "session already exists: $session_name"
+
+  else
+    create_session \
+      $subdirectory \
+      $session_name \
+      $project_directory \
+      $api_port \
+      $web_port \
+      $dev_database_name \
+      $tmuxConf_status_bg
+
+  fi
+
+  tmux a -t $session_name
+}
+
+
+function create_session {
+  local $subdirectory="${1}"
+  local $session_name="${2}"
+  local $project_directory="${3}"
+  local $api_port="${4}"
+  local $web_port="${5}"
+  local $dev_database_name="${6}"
+  local $tmuxConf_status_bg="${7}"
+
+  if [ -z $subdirectory ]
+  then
+    subdirectory='.'
+  else
+    subdirectory="${subdirectory}"
+  fi
+
+  cd $project_directory
+
+  tmux new-session -d -s $session_name
+  tmux new-window -t $session_name #2
+  tmux new-window -t $session_name #3
+  tmux new-window -t $session_name #4
+  tmux new-window -t $session_name #5
+  tmux new-window -t $session_name #6
+  tmux new-window -t $session_name #7
+
+  tmux select-window -t $session_name:1
+    tmux rename-window 'term'
+    tmux split-window -h
+      tmux select-pane -t 1
+        tmux send-keys "cd $subdirectory" C-m
+
+      tmux select-pane -t 2
+        tmux send-keys "cd $subdirectory" C-m
+
+      tmux select-pane -t 1
+
+  tmux select-window -t $session_name:2
+    tmux rename-window 'edit'
+    tmux send-keys "cd $subdirectory" C-m
+    tmux send-keys "vim ." C-m
+
+  tmux select-window -t $session_name:3
+    tmux rename-window 'serv'
+
+    tmux split-window -h 
+      tmux select-pane -t 1
+        tmux send-keys "cd api" C-m
+        tmux send-keys "rails s -p $api_port"
+
+      tmux select-pane -t 2
+        tmux send-keys "cd web" C-m
+        tmux send-keys "yarn start -p $web_port"
+
+  tmux select-window -t $session_name:4
+    tmux rename-window 'cons'
+    tmux split-window -h
+      tmux select-pane -t 1
+        tmux send-keys "cd api" C-m
+        tmux send-keys "rails c"
+
+      tmux select-pane -t 2
+        tmux send-keys "cd api" C-m
+        tmux send-keys "psql $dev_database_name"
+
+  tmux select-window -t $session_name:6
+    tmux rename-window 'stag'
+    tmux split-window -h
+
+  tmux select-window -t $session_name:7
+    tmux rename-window 'prod'
+    tmux split-window -h
+
+  tmux select-window -t $session_name:1
+
+  tmux set -t $session_name status-bg $tmuxConf_status_bg
+}

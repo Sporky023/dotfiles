@@ -1,0 +1,84 @@
+#!/bin/bash
+
+currentFilepath=${BASH_SOURCE[0]}
+currentDirpath=$(dirname "${currentFilepath}")
+
+echo "currentFilepath = $currentFilepath"
+echo "currentDirpath = $currentDirpath"
+
+yamlFilepath="$currentDirpath/support/lib/bash-yaml/yaml.sh"
+echo "yamlFilepath = $yamlFilepath"
+
+source "$yamlFilepath"
+
+projectDirpath=$(pwd)
+echo "projectFilepath = $projectFilepath"
+
+configFilepath="$projectDirpath/.tmux-config.yml"
+echo "configFilepath = $configFilepath"
+
+create_variables "$configFilepath"
+
+echo "status_bg = $status_bg"
+echo "status_fg = $status_fg"
+
+function PWD {
+  pwd | awk -F\/ '{print $(NF)}'
+}
+
+session_name=$1
+
+if [ -z $1 ]
+then
+  session_name="$(PWD)"
+fi
+
+count=$( tmux ls | grep "^$session_name:" | wc -c )
+
+if [ "$(( $count + 1 ))" != "1" ];
+then
+  echo "session already exists"
+
+else
+  tmux new-session -d -s $session_name
+
+  tmux new-window -t $session_name
+  tmux new-window -t $session_name
+
+  tmux select-window -t "$session_name:2"
+    tmux rename-window 'edit'
+    tmux send-keys -t $session_name "vim ." C-m
+
+  tmux select-window -t "$session_name:1"
+
+fi
+
+echo "status_bg = $status_bg"
+
+if [ -z $2 ]
+then
+  echo "no second argument"
+  echo "attempting to use .tmux-config.yml"
+
+  echo "inside if, status_bg = $status_bg"
+  if [ -z ${status_bg+x} ];
+  then
+    echo "no status_bg set in config"
+  else
+    echo "setting status-bg from config"
+    tmux set -t $session_name status-bg $status_bg
+  fi
+
+  if [ -z ${status_fg+x} ];
+  then
+    echo "no status_fg set in config"
+  else
+    echo "setting status-fg from config"
+    tmux set -t $session_name status-fg $status_fg
+  fi
+
+else
+  tmux set -t $session_name status-bg $2
+fi
+
+tmux a -t $session_name
