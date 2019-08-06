@@ -4,6 +4,7 @@ require 'pry'
 def main
   puts "starting"
   install_each_dot_item_via_symlink
+  create_local_files
   add_includes_to_bash_profile
   install_font
   install_terminal_theme
@@ -16,6 +17,11 @@ def install_each_dot_item_via_symlink
   items_in_dot.each do |item|
     install_via_symlink(item)
   end
+end
+
+def create_local_files
+  `touch $HOME/.aliases-local`
+  puts 'created $HOME/.aliases-local'
 end
 
 def add_includes_to_bash_profile
