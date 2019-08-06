@@ -4,6 +4,7 @@ require 'pry'
 def main
   puts "starting"
   install_each_dot_item_via_symlink
+  add_includes_to_bash_profile
   install_font
   install_terminal_theme
   puts "finished"
@@ -15,6 +16,11 @@ def install_each_dot_item_via_symlink
   items_in_dot.each do |item|
     install_via_symlink(item)
   end
+end
+
+def add_includes_to_bash_profile
+  `echo "" >> $HOME/.bash_profile`
+  `echo "source $HOME/.bash_profile_additions" >> $HOME/.bash_profile`
 end
 
 def install_font
