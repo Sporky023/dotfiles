@@ -22,6 +22,8 @@ end
 def create_local_files
   `touch $HOME/.aliases-local`
   puts 'created $HOME/.aliases-local'
+  `mkdir -p $HOME/.tmux-local`
+  puts 'created $HOME/.tmux-local/'
 end
 
 def add_includes_to_bash_profile
