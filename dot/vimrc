@@ -26,7 +26,6 @@ Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-eunuch'
 Bundle 'Sporky023/vim-web-indent'
 Bundle 'elzr/vim-json'
-Bundle 'geoffharcourt/vim-matchit'
 Bundle 'stanangeloff/php.vim'
 Bundle 'plasticboy/vim-markdown'
 " Bundle 'pangloss/vim-javascript'
@@ -59,6 +58,8 @@ Bundle 'cakebaker/scss-syntax.vim'
 " Bundle 'ack.vim'
 
 call vundle#end()
+
+packadd! matchit
 
 function! s:Vimrc()
   call s:useDoubleAsteriskInGrepForRecursive()
