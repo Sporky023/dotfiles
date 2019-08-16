@@ -78,7 +78,7 @@ then
   fi
 
 else
-  tmux set -t $session_name status-bg $2
+  tmux set -a -t $session_name status-style bg=$2
 fi
 
 tmux a -t $session_name
