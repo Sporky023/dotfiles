@@ -1,0 +1,32 @@
+snippet cl "console.log"
+console.log(\`$1\`)
+endsnippet
+
+snippet rfunc "A functional React component"
+import React from 'react'
+
+const $1 = ($2) => (
+  <$3>
+   $4
+	</$3>
+)
+
+export default $1
+endsnippet
+
+snippet confunc "A connected functional React component"
+import React from 'react'
+import { connect } from 'react-redux'
+
+const $1 = ({$2}) => (
+  <div>
+    $1 $2
+  </div>
+)
+
+const mapState = (state) => ({
+  $3
+})
+
+export default connect(mapState)($1)
+endsnippet
