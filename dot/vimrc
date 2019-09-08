@@ -27,7 +27,6 @@ Bundle 'tpope/vim-eunuch'
 Bundle 'elzr/vim-json'
 Bundle 'stanangeloff/php.vim'
 Bundle 'plasticboy/vim-markdown'
-" Bundle 'pangloss/vim-javascript'
 Bundle 'pangloss/vim-javascript'
 Bundle 'MaxMEllon/vim-jsx-pretty'
 Bundle 'godlygeek/tabular'
@@ -35,27 +34,16 @@ Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'Matt-Deacalion/vim-systemd-syntax'
 
 Bundle 'Sporky023/vim-flavored-markdown'
-" Bundle 'rhysd/vim-gfm-syntax'
 
 Bundle 'rafi/awesome-vim-colorschemes'
 Bundle 'tpope/vim-surround'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'leafgarland/typescript-vim'
 Bundle 'wesQ3/vim-windowswap'
 Bundle 'wakatime/vim-wakatime'
 
 Bundle 'ekalinin/Dockerfile.vim' 
-Bundle 'digitaltoad/vim-pug'
-" Bundle 'nightsense/seabird'
-Bundle 'flazz/vim-colorschemes'
-" Bundle 'Lokaltog/vim-distinguished'
-Bundle 'dracula/vim'
-" Bundle 'dylanaraps/crayon-theme'
 Bundle 'cakebaker/scss-syntax.vim'
 
 Bundle 'SirVer/ultisnips'
-" Bundle 'honza/vim-snippets'
-" Bundle 'ack.vim'
 
 call vundle#end()
 
