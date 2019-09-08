@@ -1,5 +1,67 @@
+snippet imt "import { useTranslation } from 'i18next'"
+import { useTranslation } from 'react-i18next'
+endsnippet
+
+snippet imcom "import a React component"
+import $1 from 'components/$1'
+endsnippet
+
+snippet clo "console.log an object"
+console.log({$1})
+endsnippet
+
+snippet clu "console.log something with util.inspect"
+console.log( '$1 = ', require('util').inspect( $1, {depth: null} ) )
+endsnippet
+
+snippet reducer "A reducer"
+import clone from 'clone'
+
+const defaultState = {
+  byId: {},
+  pages: {},
+  totalCount: null
+}
+
+const $1Reducer = (state = defaultState, action) => {
+  const newState = clone(state)
+
+  switch(action.type){
+
+    default:
+  }
+
+  return newState
+}
+
+export default $1Reducer
+endsnippet
+
 snippet cl "console.log"
 console.log(\`$1\`)
+endsnippet
+
+snippet conclfunc "a connected React class component"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+class $1 extends Component {
+  render () {
+    return (
+      <div>TODO: $1.render</div>
+    )
+  }
+}
+
+const mapState = (state, ownProps) => ({
+  $2
+})
+
+const mapDispatch = (dispatch, ownProps) => ({
+  $3
+})
+
+export default connect(mapState, mapDispatch)($1)
 endsnippet
 
 snippet rfunc "A functional React component"
