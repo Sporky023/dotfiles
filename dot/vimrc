@@ -160,7 +160,7 @@ function! s:LeaderBreakupLineOnComma()
 endfunction
 
 function! s:LeaderBreakupLineOnBrackets()
-  nmap <Leader>g 0/[[{]<CR>a<CR><Esc>k0/[[{]<CR>%i<CR><Esc>:s/ *$//<CR>0/[}\]]<CR>%j0
+  nmap <Leader>g 0/[[{]<CR>a<CR><Esc>k0/[[{]<CR>%i<CR><Esc>0/[}\]]<CR><s-v>%:s/ *$//<CR>0/[}\]]<CR>%j0
 endfunction
 
 function! s:LeaderBreakupLineOnParens()
