@@ -17,6 +17,7 @@ alias g="git status"
   alias grc="git rebase --continue"
 
   alias ga="git add -A"
+  alias gapan='git add --intent-to-add . && git add --patch'
 
   alias gb="git branch -a"
     alias gbl="git branch"
