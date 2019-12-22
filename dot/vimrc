@@ -38,7 +38,7 @@ Bundle 'Sporky023/vim-flavored-markdown'
 Bundle 'rafi/awesome-vim-colorschemes'
 Bundle 'tpope/vim-surround'
 Bundle 'wesQ3/vim-windowswap'
-Bundle 'wakatime/vim-wakatime'
+" Bundle 'wakatime/vim-wakatime'
 
 Bundle 'ekalinin/Dockerfile.vim' 
 Bundle 'cakebaker/scss-syntax.vim'
