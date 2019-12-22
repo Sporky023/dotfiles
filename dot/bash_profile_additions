@@ -13,7 +13,12 @@ function PWD {
   pwd | sed 's/^\/Users\/admin/~/' | awk -F\/ '{print $(NF-1),$(NF)}' | sed 's/ /\//' | sed 's/~\/~/~/'
 }
 
-export PS1="\u\[\e[m\]:\[\e[36m\]\$(PWD)\[\e[m\] "
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  export PS1="\u\[\e[m\]:\[\e[32m\]\$(PWD)\[\e[m\] \[\e[37m\]\\$\[\e[m\] "
+else
+  export PS1="\u\[\e[m\]:\[\e[36m\]\$(PWD)\[\e[m\] "
+fi
+
 export PS1="\n$PS1"
 
 export NVM_DIR="$HOME/.nvm"
