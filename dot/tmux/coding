@@ -57,26 +57,30 @@ echo "status_bg = $status_bg"
 
 if [ -z $2 ]
 then
-  echo "no second argument"
-  echo "attempting to use .tmux-config.yml"
+  # following code removed 2019-10-11
+  # it has to do with using a config file
+  #
+  # echo "no second argument"
+  # echo "attempting to use .tmux-config.yml"
 
-  echo "inside if, status_bg = $status_bg"
-  if [ -z ${status_bg+x} ];
-  then
-    echo "no status_bg set in config"
-  else
-    echo "setting status-bg from config"
-    tmux set -t $session_name status-bg $status_bg
-  fi
+  # echo "inside if, status_bg = $status_bg"
+  # if [ -z ${status_bg+x} ];
+  # then
+  #   echo "no status_bg set in config"
+  # else
+  #   echo "setting status-bg from config"
+  #   tmux set -t $session_name status-bg $status_bg
+  # fi
 
-  if [ -z ${status_fg+x} ];
-  then
-    echo "no status_fg set in config"
-  else
-    echo "setting status-fg from config"
-    tmux set -t $session_name status-fg $status_fg
-  fi
+  # if [ -z ${status_fg+x} ];
+  # then
+  #   echo "no status_fg set in config"
+  # else
+  #   echo "setting status-fg from config"
+  #   tmux set -t $session_name status-fg $status_fg
+  # fi
 
+  tmux set -a -t $session_name status-style bg=colour244,fg=colour15
 else
   tmux set -a -t $session_name status-style bg=$2
 fi

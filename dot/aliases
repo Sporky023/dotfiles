@@ -43,6 +43,9 @@ alias g="git status"
 
   alias gsh="git show"
 
+alias j="jobs"
+  alias jpk="jobs -p | xargs kill -9"
+
 alias t="tmux -2"
   alias tc=". ~/.tmux/coding"
 

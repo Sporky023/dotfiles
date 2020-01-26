@@ -1,4 +1,48 @@
-snippet imt "import { useTranslation } from 'i18next'"
+snippet cdat "clearData function"
+const clearData = (dispatch, ownProps) => {
+  $1
+}
+endsnippet
+snippet dataloader "connected react component withDataLoader"
+import React from 'react'
+import { connect } from 'react-redux'
+
+import withRouterParams from 'hocs/withRouterParams'
+import withLoadableDataByStatus from 'hocs/withLoadableDataByStatus'
+import { $8 as $8Status } from 'selectors/status'
+import { $9 } from 'selectors'
+import { $10 } from 'actions'
+
+const dataStatus = (state, ownProps) => (
+  $5
+)
+
+const loadData = (dispatch, ownProps) => (
+  $6
+)
+
+const mapState = (state, ownProps) => ({
+  $4
+})
+
+const $1 = ({$3}) => (
+  <React.Fragment>
+    $2
+	</React.Fragment>
+)
+
+export default withRouterParams(
+  {$7},
+
+  withLoadableDataByStatus(
+    dataStatus,
+    loadData,
+    connect(mapState)($1)
+  )
+)
+endsnippet
+
+snippet imt "import { useTranslation } from 'react-i18next'"
 import { useTranslation } from 'react-i18next'
 endsnippet
 
@@ -6,16 +50,28 @@ snippet imcom "import a React component"
 import $1 from 'components/$1'
 endsnippet
 
+snippet imhoc "import a hoc"
+import $1 from 'hocs/$1'
+endsnippet
+
 snippet clo "console.log an object"
 console.log({$1})
 endsnippet
 
 snippet clu "console.log something with util.inspect"
-console.log( '$1 = ', require('util').inspect( $1, {depth: null} ) )
+console.log( '$1 = ', require('util').inspect( $1, {depth: ${2:null}} ) )
+endsnippet
+
+snippet cll "console.log the line number"
+console.log('line: '+ new Error().stack.split("\n").find(x => x.match(/at/)).replace(/at[^:]*:(\d+):.*/, "\$1"))
+endsnippet
+
+snippet clup "console.log something with util.inspect, with prefix"
+console.log( '$1: $2 = ', require('util').inspect( $2, {depth: ${3:null} } ) )
 endsnippet
 
 snippet reducer "A reducer"
-import clone from 'clone'
+import produce from 'immer'
 
 const defaultState = {
   byId: {},
@@ -23,16 +79,14 @@ const defaultState = {
   totalCount: null
 }
 
-const $1Reducer = (state = defaultState, action) => {
-  const newState = clone(state)
+const $1Reducer = (state = defaultState, action) => (
+  produce(state, draft => {
+		switch(action.type){
 
-  switch(action.type){
-
-    default:
-  }
-
-  return newState
-}
+			default:
+		}
+	})
+)
 
 export default $1Reducer
 endsnippet
@@ -80,15 +134,24 @@ snippet confunc "A connected functional React component"
 import React from 'react'
 import { connect } from 'react-redux'
 
+const mapState = (state) => ({
+  $3
+})
+
+const mapDispatch = (dispatch) => ({
+  $4
+})
+
 const $1 = ({$2}) => (
   <div>
     $1 $2
   </div>
 )
 
-const mapState = (state) => ({
-  $3
-})
+export default connect(mapState, mapDispatch)($1)
+endsnippet
 
-export default connect(mapState)($1)
+snippet xoc "jsX Open, Close tag"
+<$1$2>
+</$1>
 endsnippet

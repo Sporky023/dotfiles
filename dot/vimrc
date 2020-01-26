@@ -44,6 +44,8 @@ Bundle 'ekalinin/Dockerfile.vim'
 Bundle 'cakebaker/scss-syntax.vim'
 
 Bundle 'SirVer/ultisnips'
+Bundle 'tpope/vim-abolish'
+Bundle 'yegappan/greplace'
 
 call vundle#end()
 
@@ -67,12 +69,14 @@ function! s:Vimrc()
   call s:LeaderSave()
   call s:LeaderCloseWindow()
   call s:LeaderBreakupLine()
+  call s:LeaderConvertEs6LiteralToBraces()
   call s:LeaderForCtrlP()
   call s:LeaderInsertTimestamp()
   call s:LeaderWindowswap()
   call s:LeaderCleanFileWhitespace()
 
   call s:treatRuAsRuby()
+  call s:treatCmpAsXml()
   call s:SetCtrlpIgnore()
   call s:CtrlpDontSearchForGitDir()
   " call s:CtrlpIgnoreSameFilesAsGitignore()
@@ -155,8 +159,17 @@ function! s:LeaderBreakupLine()
   call s:LeaderBreakupLineOnParens()
 endfunction
 
+function! s:LeaderConvertEs6LiteralToBraces()
+  nmap <Leader>p 0/=><CR>f(i{<CR>return <ESC>jVkf(%>k0f(%a<CR>}<ESC>k0f)%O<CR><ESC>kcc
+endfunction
+
 function! s:LeaderBreakupLineOnComma()
   nmap <Leader>f 0f,a<CR><Esc>
+endfunction
+
+" 2019-09-12 work in progress
+function! s:LeaderBreakupLineOnBrackets2() " 2
+  nmap <Leader>g /[[{]<CR>a<CR><Esc>k/[[{]<CR>V%:s/\s$//<CR>0
 endfunction
 
 function! s:LeaderBreakupLineOnBrackets()
@@ -206,8 +219,12 @@ function! s:treatRuAsRuby()
   au BufRead,BufNewFile *.ru setfiletype ruby
 endfunction
 
+function! s:treatCmpAsXml()
+  au BufRead,BufNewFile *.cmp setfiletype xml
+endfunction
+
 function! s:SetCtrlpIgnore()
-  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\'
+  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|storage\|tmp\|tmp\'
 endfunction
 
 function! s:CtrlpDontSearchForGitDir()
