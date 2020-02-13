@@ -6,18 +6,20 @@ currentDirpath=$(dirname "${currentFilepath}")
 echo "currentFilepath = $currentFilepath"
 echo "currentDirpath = $currentDirpath"
 
-yamlFilepath="$currentDirpath/support/lib/bash-yaml/yaml.sh"
-echo "yamlFilepath = $yamlFilepath"
+# yamlFilepath="$currentDirpath/support/lib/bash-yaml/yaml.sh"
+# echo "yamlFilepath = $yamlFilepath"
 
-source "$yamlFilepath"
+# source "$yamlFilepath"
 
 projectDirpath=$(pwd)
 echo "projectFilepath = $projectFilepath"
 
-configFilepath="$projectDirpath/.tmux-config.yml"
+configFilepath="$projectDirpath/.tmux-config.json"
 echo "configFilepath = $configFilepath"
 
-create_variables "$configFilepath"
+status_bg=$(cat $configFilepath | jq --raw-output '.status_bg') # raw-output => no quotes
+status_fg=$(cat $configFilepath | jq --raw-output '.status_fg')
+# create_variables "$configFilepath"
 
 echo "status_bg = $status_bg"
 echo "status_fg = $status_fg"
@@ -29,6 +31,11 @@ function PWD {
 session_name=$1
 
 if [ -z $1 ]
+then
+  session_name=$(cat $configFilepath | jq --raw-output '.session_name')
+fi
+
+if [ -z $session_name ]
 then
   session_name="$(PWD)"
 fi
@@ -57,30 +64,28 @@ echo "status_bg = $status_bg"
 
 if [ -z $2 ]
 then
-  # following code removed 2019-10-11
-  # it has to do with using a config file
-  #
-  # echo "no second argument"
-  # echo "attempting to use .tmux-config.yml"
+   echo "no second argument"
+   echo "attempting to use .tmux-config.json"
 
-  # echo "inside if, status_bg = $status_bg"
-  # if [ -z ${status_bg+x} ];
-  # then
-  #   echo "no status_bg set in config"
-  # else
-  #   echo "setting status-bg from config"
-  #   tmux set -t $session_name status-bg $status_bg
-  # fi
+   echo "inside if, status_bg = $status_bg"
 
-  # if [ -z ${status_fg+x} ];
-  # then
-  #   echo "no status_fg set in config"
-  # else
-  #   echo "setting status-fg from config"
-  #   tmux set -t $session_name status-fg $status_fg
-  # fi
+   if [ -z ${status_bg+x} ];
+   then
+     echo "no status_bg set in config"
+     $status_bg=colour244
+   else
+     echo "setting status-bg from config: $status_bg"
+   fi
 
-  tmux set -a -t $session_name status-style bg=colour244,fg=colour15
+   if [ -z ${status_fg+x} ];
+   then
+     echo "no status_fg set in config; setting default"
+     $status_fg=colour15
+   else
+     echo "setting status-fg from config: $status_fg"
+   fi
+
+  tmux set -a -t $session_name status-style bg=$status_bg,fg=$status_fg
 else
   tmux set -a -t $session_name status-style bg=$2
 fi
