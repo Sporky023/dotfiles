@@ -55,6 +55,7 @@ function! s:Vimrc()
   call s:useDoubleAsteriskInGrepForRecursive()
 
   call s:SyntaxHighlighting()
+  call s:DisableFolding()
   call s:OpenSplitsAfterCurrent()
   call s:TabToEscapeInsertMode()
   call s:Softtabs2()
@@ -87,6 +88,10 @@ endfunction
 
 function! s:SyntaxHighlighting()
   syntax on
+endfunction
+
+function! s:DisableFolding()
+  set nofoldenable
 endfunction
 
 function! s:OpenSplitsAfterCurrent()
