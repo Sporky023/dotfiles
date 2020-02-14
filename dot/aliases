@@ -55,7 +55,9 @@ alias t="tmux -2"
 
  alias ta="t a -t"
 
-alias ltr="tree -I node_modules"
+alias tr="tree"
+  alias trl="tree -L"
+  alias trin="tree -I node_modules"
 
 alias l="ls -lhG"
 
