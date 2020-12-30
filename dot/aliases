@@ -4,6 +4,8 @@ alias lgcraft="lgc_craft"
 alias csave="clear; sleep 8; /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias save="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias saver="clear; ls -l ~; sleep 7; /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias sba="source ~/.aliases"
+alias sbp="source ~/.bash_profile"
 alias serve="ruby -run -e httpd . -p 9090"
 
 alias be='bundle exec'
