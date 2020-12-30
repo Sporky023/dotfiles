@@ -9,6 +9,8 @@ set laststatus=2  " Always display the status line
 set number
 set backspace=2
 
+set shell=bash
+
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
