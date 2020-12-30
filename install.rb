@@ -8,6 +8,7 @@ def main
   add_includes_to_bash_profile
   install_font
   install_terminal_theme
+  setup_global_gitignore
   puts "finished"
 
   display_report
@@ -56,6 +57,12 @@ def install_terminal_theme
   puts "Installing Terminal theme"
   `cd #{File.dirname(__FILE__)} && . install_terminal_theme.sh`
   puts "Finished installing Terminal theme"
+end
+
+def setup_global_gitignore
+  puts "Setting up global gitignore at $HOME/.gitignore"
+  `git config --global core.excludesfile $HOME/.gitignore`
+  puts "Finished setting up global gitignore"
 end
 
 def display_report
