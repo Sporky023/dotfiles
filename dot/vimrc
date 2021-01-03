@@ -115,8 +115,8 @@ endfunction
 function! s:VisualAppearance()
   set colorcolumn=81
   colorscheme jellybeans
-  hi StatusLine ctermbg=darkblue
-  hi LineNr ctermfg=darkblue
+  hi StatusLine ctermbg=186
+  hi LineNr ctermfg=237
 endfunction
 
 function! s:AllowPluginsToSetIndentRules()
