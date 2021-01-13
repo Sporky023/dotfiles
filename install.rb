@@ -1,6 +1,8 @@
 require 'fileutils'
 require 'pry'
 
+require_relative './install_utils'
+
 def main
   puts "starting"
   install_each_dot_item_via_symlink
@@ -28,8 +30,10 @@ def create_local_files
 end
 
 def add_includes_to_bash_profile
-  `echo "" >> $HOME/.bash_profile`
-  `echo "source $HOME/.bash_profile_additions" >> $HOME/.bash_profile`
+  InstallUtils.ensure_file_has_line(
+    '$HOME/.bash_profile',
+    'source $HOME/.bash_profile_additions'
+  )
 end
 
 def install_font
