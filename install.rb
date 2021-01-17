@@ -8,7 +8,7 @@ def main
   install_each_dot_item_via_symlink
   create_local_files
   add_includes_to_bash_profile
-  install_font
+  ARGV.include?('--skip-fonts') && (puts('Skipping fonts') || true) || install_font
   install_terminal_theme
   setup_global_gitignore
   puts "finished"
@@ -59,7 +59,7 @@ end
 
 def install_terminal_theme
   puts "Installing Terminal theme"
-  `cd #{File.dirname(__FILE__)} && . install_terminal_theme.sh`
+  `cd #{File.dirname(__FILE__)} && . scripts/install_terminal_theme.bash`
   puts "Finished installing Terminal theme"
 end
 

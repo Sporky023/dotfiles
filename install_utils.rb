@@ -6,7 +6,8 @@ module InstallUtils
     filepath = filepath.split('$HOME').join( ENV['HOME'] )
 
     File.open(filepath, MODE_READ_AND_APPEND) do |f|
-      while existing_line = f.gets.chomp
+      while existing_line = f.gets
+        existing_line = existing_line.chomp
         if existing_line == line
           return false
         end
