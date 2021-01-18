@@ -10,6 +10,7 @@ def main
   add_includes_to_bash_profile
   ARGV.include?('--skip-fonts') && (puts('Skipping fonts') || true) || install_font
   install_terminal_theme
+  install_vundle
   setup_global_gitignore
   puts "finished"
 
@@ -61,6 +62,10 @@ def install_terminal_theme
   puts "Installing Terminal theme"
   `cd #{File.dirname(__FILE__)} && . scripts/install_terminal_theme.bash`
   puts "Finished installing Terminal theme"
+end
+
+def install_vundle
+  `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 end
 
 def setup_global_gitignore
