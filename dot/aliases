@@ -11,7 +11,7 @@ alias serve="ruby -run -e httpd . -p 9090"
 alias be='bundle exec'
 
 alias c='clear'
-  alias cls='clear; ls -l'
+  alias cls='clear; ls -lh'
 
 alias htl='history | tail'
 alias g="git status"
