@@ -16,14 +16,19 @@ function PWD {
   pwd | sed 's/^\/Users\/admin/~/' | awk -F\/ '{print $(NF-1),$(NF)}' | sed 's/ /\//' | sed 's/~\/~/~/'
 }
 
+function U {
+  whoami | head -c 1
+}
+
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   if test -f "$HOME/.is_prod"; then
     RED='\033[0;31m'
     NC='\033[0m' # No Color
-    printf "\nfile detected at \$HOME/.is_prod -> coloring prompt ${RED}red${NC}\n"
-    export PS1="\u\[\e[m\]:\[\e[31m\]\$(PWD)\[\e[m\] \[\e[37m\]\\$\[\e[m\] "
+    printf "\nfile detected at \$HOME/.is_prod -> coloring hostname ${RED}red${NC}\n"
+    export PS1="\$(U)\[\e[m\]@\[\e[31m\]\h\[\e[m\]:\[\e[36m\]\$(PWD)\[\e[m\] \[\e[37m\]\\$\[\e[m\] "
   else
-    export PS1="\u\[\e[m\]:\[\e[32m\]\$(PWD)\[\e[m\] \[\e[37m\]\\$\[\e[m\] "
+    export PS1="\$(U)\[\e[m\]@\[\e[32m\]\h\[\e[m\]:\[\e[36m\]\$(PWD)\[\e[m\] \[\e[37m\]\\$\[\e[m\] "
+    # export PS1="\u\[\e[m\]:\[\e[32m\]\$(PWD)\[\e[m\] \[\e[37m\]\\$\[\e[m\] "
   fi
 else
   export PS1="\u\[\e[m\]:\[\e[36m\]\$(PWD)\[\e[m\] "
