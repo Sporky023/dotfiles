@@ -18,8 +18,8 @@ alias g="git status"
   alias gca="git commit --amend"
 
   alias gr='git rebase'
-    alias grb5='git rebase -i head~5'
-    alias grb10='git rebase -i head~10'
+    alias grb5='git rebase -i HEAD~5'
+    alias grb10='git rebase -i HEAD~10'
     alias grc="git rebase --continue"
 
   alias ga="git add -A"
